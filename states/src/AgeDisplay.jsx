@@ -5,14 +5,13 @@ export function AgeDisplay() {
   function increaseAge() {
     setAge(age + 1);
   }
-  function reduceAge() {
-    setAge(age - 1);
-  }
+
+  //   console.log(age);
   return (
     <div>
       <button onClick={increaseAge}>Increase Age</button>
-      <button onClick={reduceAge}>Decrease Age</button>
-      <p>I am {age} years old</p>
+      <button onClick={() => setAge(age - 1)}>Decrease Age</button>
+      <p style={{ color: "red" }}>I am {age} years old</p>
     </div>
   );
 }
