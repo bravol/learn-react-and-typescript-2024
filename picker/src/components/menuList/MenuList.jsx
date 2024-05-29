@@ -1,35 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import MenuListItem from "../menuListItem/MenuListItem";
 import s from "./style.module.css";
 
-const ParentComponent = () => {
-  const [selectedDifficulty, setSelectedDifficulty] = useState("Low");
-
-  const handleItemClick = (difficulty) => {
-    setSelectedDifficulty(difficulty);
-  };
-
+const ParentComponent = (props) => {
   return (
     <div className={s.container}>
       <MenuListItem
-        isSelected={selectedDifficulty === "Low"}
+        isSelected={props.difficulty === "Low"}
         difficulty="Low"
-        itemClick={handleItemClick}
+        itemClick={props.itemClick}
       />
       <MenuListItem
-        isSelected={selectedDifficulty === "Medium"}
+        isSelected={props.difficulty === "Medium"}
         difficulty="Medium"
-        itemClick={handleItemClick}
+        itemClick={props.itemClick}
       />
       <MenuListItem
-        isSelected={selectedDifficulty === "High"}
+        isSelected={props.difficulty === "High"}
         difficulty="High"
-        itemClick={handleItemClick}
+        itemClick={props.itemClick}
       />
       <MenuListItem
-        isSelected={selectedDifficulty === "Insane"}
+        isSelected={props.difficulty === "Insane"}
         difficulty="Insane"
-        itemClick={handleItemClick}
+        itemClick={props.itemClick}
       />
     </div>
   );
