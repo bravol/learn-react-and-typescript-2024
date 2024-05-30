@@ -13,17 +13,25 @@ function App() {
   const [recommendationList, setRecommendationLists] = useState([]);
 
   const fetchPopulars = async () => {
-    const popularTVShowList = await TVShowAPI.fetchPopulars();
-    if (popularTVShowList.length > 0) {
-      setCurrentTVShow(popularTVShowList[0]);
+    try {
+      const popularTVShowList = await TVShowAPI.fetchPopulars();
+      if (popularTVShowList.length > 0) {
+        setCurrentTVShow(popularTVShowList[0]);
+      }
+    } catch (error) {
+      alert("Soo sorry, somethign when wrong, please try again later");
     }
   };
 
   //fetch recommendations
   const fetchRecommendations = async (id) => {
-    const response = await TVShowAPI.fetchRecommendations(id);
-    if (response.length > 0) {
-      setRecommendationLists(response.slice(0, 10));
+    try {
+      const response = await TVShowAPI.fetchRecommendations(id);
+      if (response.length > 0) {
+        setRecommendationLists(response.slice(0, 10));
+      }
+    } catch (error) {
+      alert("Soo sorry, somethign when wrong, please try again later");
     }
   };
   useEffect(() => {
@@ -42,9 +50,13 @@ function App() {
 
   //fetch recommendations
   async function searchTVShow(title) {
-    const response = await TVShowAPI.fetchByTitle(title);
-    if (response.length > 0) {
-      setCurrentTVShow(response[0]);
+    try {
+      const response = await TVShowAPI.fetchByTitle(title);
+      if (response.length > 0) {
+        setCurrentTVShow(response[0]);
+      }
+    } catch (error) {
+      alert("Soo sorry, somethign when wrong, please try again later");
     }
   }
 
