@@ -11,15 +11,60 @@ body {
 }
 .header {
   flex: 2;
-  background-color: blue;
 }
 
 .tv_show_detail {
   flex: 4;
-  background-color: red;
 }
 
 .recommended_tv_shows {
   flex: 2;
-  background-color: green;
+}
+
+/* TV SHOW DETAILS */
+
+.show_title {
+  font-weight: 400;
+  font-size: 35px;
+}
+
+.show_rating_container {
+  display: flex;
+}
+.show_rating {
+  margin-top: 3px;
+  margin-left: 5px;
+}
+.show_overview {
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 20px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.show_overview:hover {
+  overflow-y: auto;
+}
+
+/* LOGO */
+.logo_container {
+  display: flex;
+}
+.logo_img {
+  height: 40px;
+  width: 40px;
+}
+
+.logo_title {
+  font-size: 25px;
+  font-weight: 400;
+  padding-top: 5px;
+  padding-left: 5px;
+  white-space: nowrap;
+}
+
+.logo_subtitle {
+  margin-left: 5px;
+  white-space: nowrap;
 }
