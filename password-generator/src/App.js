@@ -1,5 +1,11 @@
+import PasswordGeneratorCard from "./components/passwors_generator_card/PasswordGeneratorCard";
+
 function App() {
-  return <div className="">password picker</div>;
+  return (
+    <div className="app">
+      <PasswordGeneratorCard />
+    </div>
+  );
 }
 
 export default App;
