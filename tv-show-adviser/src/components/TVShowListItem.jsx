@@ -1,11 +1,11 @@
 import React from "react";
 import { SMALL_IMG_COVER_BASE_URL } from "../config";
 
-export default function TVShowListItem({ tvShow, onClick }) {
+export default function TVShowListItem({ tvShow, onClickItem }) {
   const MAX_TITLE_CHAR = 20;
 
   const onClick_ = () => {
-    onClick();
+    onClickItem(tvShow);
   };
   return (
     <div className="item_container" onClick={onClick_}>

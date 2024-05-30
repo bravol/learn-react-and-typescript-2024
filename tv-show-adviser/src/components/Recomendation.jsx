@@ -1,6 +1,6 @@
 import TVShowListItem from "./TVShowListItem";
 
-export function Recommendation({ list }) {
+export function Recommendation({ list, onClickItem }) {
   return (
     <div>
       <div className="recommendation_title">You'll probably like :</div>
@@ -10,6 +10,7 @@ export function Recommendation({ list }) {
             <span className="recommendation_tv_show_item" key={tvShow.id}>
               <TVShowListItem
                 tvShow={tvShow}
+                onClickItem={onClickItem}
                 onClick={() => console.log("todo")}
               />
             </span>
