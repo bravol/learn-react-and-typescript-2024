@@ -1,1 +1,25 @@
+body {
+  color: white;
+  font-family: Maximum Impact;
+}
+.main_container {
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: black;
+}
+.header {
+  flex: 2;
+  background-color: blue;
+}
 
+.tv_show_detail {
+  flex: 4;
+  background-color: red;
+}
+
+.recommended_tv_shows {
+  flex: 2;
+  background-color: green;
+}
