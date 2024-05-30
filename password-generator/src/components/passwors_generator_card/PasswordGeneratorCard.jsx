@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import PasswordGeneratorBody from "../password_generator_body/PasswordGeneratorBody";
 
 function PasswordGeneratorCard() {
+  const [password, setPassword] = useState("password");
   return (
     <div className="root">
       <div className="main">
         <Header />
-        <PasswordGeneratorBody />
+        <PasswordGeneratorBody setPassword={setPassword} />
       </div>
 
-      <Footer />
+      <Footer password={password} />
     </div>
   );
 }
