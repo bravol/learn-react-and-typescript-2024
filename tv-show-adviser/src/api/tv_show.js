@@ -7,4 +7,11 @@ export class TVShowAPI {
     console.log(response.data.results);
     return response.data.results;
   }
+
+  static async fetchRecommendations(tvShowId) {
+    const response = await axios.get(
+      `${BASE_URL}${tvShowId}/recommendations${API_KEY_PARAM}`
+    );
+    return response.data.results;
+  }
 }
