@@ -1,7 +1,5 @@
-import "./App.css";
-
 function App() {
-  return <div className="App">password picker</div>;
+  return <div className="">password picker</div>;
 }
 
 export default App;

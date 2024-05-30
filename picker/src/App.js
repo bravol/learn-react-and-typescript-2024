@@ -13,7 +13,7 @@ function App() {
     <div>
       <h2 style={{ textAlign: "center" }}>Select your react difficulty</h2>
       <div className="workspace">
-        <MenuList itemClick={itemClick} />
+        <MenuList itemClick={itemClick} difficulty={currentDifficulty} />
         <DisplayDificulty difficulty={currentDifficulty} />
       </div>
     </div>
