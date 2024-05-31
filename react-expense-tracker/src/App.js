@@ -1,5 +1,6 @@
 import ExpenseInput from "./container/ExpenseInput/ExpenseInput";
 import ExpenseList from "./container/ExpenseInput/ExpenseList";
+import IncomeInput from "./container/IncomeInput/IncomeInput";
 import s from "./style.module.css";
 
 function App() {
@@ -7,7 +8,9 @@ function App() {
     <div className={s.main_container}>
       <div className={`row ${s.header}`}>
         <div className={`col-3`}>Logo</div>
-        <div className={`col-9 ${s.income_input}`}>Income input</div>
+        <div className={`col-9 ${s.income_input}`}>
+          <IncomeInput />
+        </div>
       </div>
       <div className={`row ${s.workspace}`}>
         <div className={`col-12  ${s.expense_input}`}>
