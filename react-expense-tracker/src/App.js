@@ -1,6 +1,7 @@
-import { ExpenseTotal } from "./components/ExpenseTotal/ExpenseTotal";
+import { Logo } from "./components/Logo/Logo";
 import ExpenseInput from "./container/ExpenseInput/ExpenseInput";
 import ExpenseList from "./container/ExpenseInput/ExpenseList";
+import { ExpenseTotal } from "./container/ExpenseTotal/ExpenseTotal";
 import IncomeInput from "./container/IncomeInput/IncomeInput";
 import s from "./style.module.css";
 
@@ -8,7 +9,9 @@ function App() {
   return (
     <div className={s.main_container}>
       <div className={`row ${s.header}`}>
-        <div className={`col-3`}>Logo</div>
+        <div className={`col-3`}>
+          <Logo title="Dollar" subtitle="Track your Expenses" />
+        </div>
         <div className={`col-9 ${s.income_input}`}>
           <IncomeInput />
         </div>
