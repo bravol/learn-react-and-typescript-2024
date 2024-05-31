@@ -1,3 +1,4 @@
+import { ExpenseTotal } from "./components/ExpenseTotal/ExpenseTotal";
 import ExpenseInput from "./container/ExpenseInput/ExpenseInput";
 import ExpenseList from "./container/ExpenseInput/ExpenseList";
 import IncomeInput from "./container/IncomeInput/IncomeInput";
@@ -18,7 +19,9 @@ function App() {
         </div>
         <div className={`col-11 col-md-6 col-lg-4 ${s.expense_list}`}>
           <ExpenseList />
-          <div className={`col-12 ${s.expense_total}`}>ExpenseTotal</div>
+          <div className={`col-12 ${s.expense_total}`}>
+            <ExpenseTotal />
+          </div>
         </div>
       </div>
     </div>
