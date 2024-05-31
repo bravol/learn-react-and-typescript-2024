@@ -10,6 +10,7 @@ import {
   persistStore,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { loggerMiddelWare } from "../middlewares/loggerMiddleWare";
 import { expenseSlice } from "./expense/expense_slice";
 
 // const store = configureStore({
@@ -40,7 +41,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).prepend(loggerMiddelWare.middleware),
 });
 //[x] 5 Create a persisted version of the store
 const persistor = persistStore(store);
