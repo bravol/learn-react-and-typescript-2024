@@ -5,7 +5,7 @@ const BASE_URL = "http://localhost:3200/notes";
 export class NoteApi {
   static async create(note) {
     const response = await axios.post(`${BASE_URL}`, note);
-    return response.data;
+    return this.formatId(response.data);
   }
   static async fetachAll() {
     const response = await axios.get(`${BASE_URL}`);
@@ -19,8 +19,16 @@ export class NoteApi {
     const response = await axios.delete(`${BASE_URL}/${id}`);
     return response.data;
   }
-  static async update(note) {
-    const response = await axios.put(`${BASE_URL}/${note.id}`, note);
+  static async update(id, note) {
+    const response = await axios.patch(`${BASE_URL}/${id}`, note);
     return response.data;
+  }
+
+  //use this function only if the id is not a string
+  static formatId(note) {
+    return {
+      ...note,
+      id: note.id.toString(),
+    };
   }
 }
