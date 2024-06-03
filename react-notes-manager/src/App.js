@@ -1,5 +1,12 @@
+import { Outlet } from "react-router-dom";
+
 function App() {
-  return <div>React redux statrter</div>;
+  return (
+    <div>
+      Hello
+      <Outlet />
+    </div>
+  );
 }
 
 export default App;
