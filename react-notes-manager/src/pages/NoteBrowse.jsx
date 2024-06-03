@@ -20,14 +20,14 @@ export default function NoteBrowse() {
     return containsTitle || containsContent;
   });
   return (
-    <div className=" row justify-content-center mb-5">
+    <div className="row justify-content-center mb-5">
       <div className="col-sm-12 col-md-4">
         <SearchBar onTextChange={setSearchTerm} />
       </div>
       {notes?.length === 0 && (
-        <div className="d-flex justify-content-center">
-          You do not have any note, do you want to
-          <Link to="/note/new">create one?</Link>
+        <div className="d-flex justify-content-center mt-5">
+          You do not have any note, do you want to{" "}
+          <Link to="/note/new"> create one?</Link>
         </div>
       )}
       <NoteList notes={filteredNotelist} />
