@@ -9,10 +9,12 @@ import s from "./style.module.css";
 const NoteList = ({ notes }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  async function deleteNote_(id) {
-    if (window.confirm("Delete this note?")) {
-      const response = await NoteApi.delete(id);
-      dispatch(deleteNote(response));
+
+  async function deleteNote_(note) {
+    if (window.confirm("Delete note ?")) {
+      NoteApi.delete(note?.id);
+      dispatch(deleteNote(note));
+      navigate("/");
     }
   }
   return (
@@ -23,8 +25,8 @@ const NoteList = ({ notes }) => {
             title={note.title}
             content={note.content}
             subtitle={note.created_at}
-            onClick={() => navigate("/notes/" + note.id)}
-            onClickTrash={() => deleteNote_(note.id)}
+            onClick={() => navigate("/notes/" + note?.id)}
+            onClickTrash={() => deleteNote_(note)}
           />
         </div>
       ))}

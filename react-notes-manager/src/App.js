@@ -16,10 +16,14 @@ function App() {
     dispatch(setNoteList(noteList));
   }
   useEffect(() => {
-    fetchAllNotes();
+    const unsub = NoteApi.onShouldSyncNotes(fetchAllNotes);
+    // fetchAllNotes();
+    return () => {
+      unsub();
+    };
   }, []);
   return (
-    <div>
+    <div className="position-relative">
       <Header />
       <Button onClick={() => navigate("/note/new")} className="buttonAdd">
         <Plus />

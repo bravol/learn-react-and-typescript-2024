@@ -9,22 +9,21 @@ import { deleteNote, updateNote } from "../store/notes/note_slice";
 export default function Note() {
   const { id } = useParams();
   const notes = useSelector((store) => store.noteSlice.noteList);
-  const note = notes.find((note) => note.id === id);
+  const note = notes.find((note) => note?.id === id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [isEditable, setisEditable] = useState(false);
   const submit = async (data) => {
     // console.log("the edited data is", data);
-    const response = await NoteApi.update(note.id, data);
+    const response = await NoteApi.update(note?.id, data);
     dispatch(updateNote(response));
     setisEditable(false);
   };
   async function deleteNote_() {
-    if (window.confirm("Delete this note?")) {
-      const response = await NoteApi.delete(note.id);
-      //   console.log("the deleted note is", response);
-      dispatch(deleteNote(response));
+    if (window.confirm("Delete note ?")) {
+      NoteApi.delete(note?.id);
+      dispatch(deleteNote(note));
       navigate("/");
     }
   }
@@ -34,7 +33,7 @@ export default function Note() {
       {note && (
         <NoteForm
           isEditable={isEditable}
-          title={isEditable ? "Edit Note" : note.title}
+          title={isEditable ? "Edit Note" : note?.title}
           note={note}
           onClickDelete={deleteNote_}
           onClickEdit={() => setisEditable(!isEditable)}
@@ -45,4 +44,4 @@ export default function Note() {
   );
 }
 
-export const ProtectedNote = withAuthRequired(Note);
+export const ProtectedNote = withAuthRequired(Note); //incase you need a protected note

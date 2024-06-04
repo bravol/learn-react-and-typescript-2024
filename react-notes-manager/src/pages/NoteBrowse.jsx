@@ -9,12 +9,12 @@ export default function NoteBrowse() {
   const notes = useSelector((store) => store.noteSlice.noteList);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const filteredNotelist = notes.filter((note) => {
-    const containsTitle = note.title
+  const filteredNotelist = notes?.filter((note) => {
+    const containsTitle = note?.title
       .trim()
       .toUpperCase()
       .includes(searchTerm.trim().toUpperCase());
-    const containsContent = note.content
+    const containsContent = note?.content
       .trim()
       .toUpperCase()
       .includes(searchTerm.trim().toUpperCase());

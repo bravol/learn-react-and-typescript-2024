@@ -17,22 +17,21 @@ import { persistor, store } from "./store";
 FirebaseApp.init(); // before doing anything, we first establish connection with firebase
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/" element={<ProtectedApp />}>
-              <Route path="/" element={<NoteBrowse />} />
-              <Route path="/notes/:id" element={<Note />} />
-              <Route path="/note/new" element={<NoteCreate />} />
-              <Route path="*" element={<PageNotFound />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<ProtectedApp />}>
+            <Route path="/" element={<NoteBrowse />} />
+            <Route path="/notes/:id" element={<Note />} />
+            <Route path="/note/new" element={<NoteCreate />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
 );
+//   <React.StrictMode> removed to avoid Useffect to run twice
