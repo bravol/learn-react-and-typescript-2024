@@ -1,0 +1,35 @@
+#root {
+  height: 100vh;
+  font-family: Roboto;
+  background-color: #f8f9fb;
+}
+
+.workspace {
+  padding: 50px;
+}
+
+/* sign in */
+
+.signInformContainer {
+}
+
+.signInformGroup {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signInformGroup > * {
+  margin: 10px;
+}
+
+.signIntitle {
+  font-weight: bold;
+  text-align: center;
+}
+
+.signInbutton {
+  margin-top: 50px;
+  width: 100%;
+}
