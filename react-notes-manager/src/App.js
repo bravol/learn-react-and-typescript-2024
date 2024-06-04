@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { NoteApi } from "./api/note_api";
 import Header from "./components/header/Header";
+import { withAuthRequired } from "./hoc/withAuthRequired";
 import { setNoteList } from "./store/notes/note_slice";
 
 function App() {
@@ -25,3 +26,4 @@ function App() {
 }
 
 export default App;
+export const ProtectedApp = withAuthRequired(App);
