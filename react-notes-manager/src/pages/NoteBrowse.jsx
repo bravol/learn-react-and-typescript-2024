@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { SearchBar } from "../components/search/SearchBar";
 import NoteList from "../container/noteList/NoteList";
+import { withAuthRequired } from "../hoc/withAuthRequired";
 
 export default function NoteBrowse() {
   const notes = useSelector((store) => store.noteSlice.noteList);
@@ -34,3 +35,5 @@ export default function NoteBrowse() {
     </div>
   );
 }
+
+export const ProtectedNoteBrowse = withAuthRequired(NoteBrowse);

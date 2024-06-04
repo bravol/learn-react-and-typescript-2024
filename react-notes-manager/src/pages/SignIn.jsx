@@ -1,13 +1,28 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthAPI } from "../api/authAPI";
 import Button from "../components/button/Button";
 import Input from "../components/input/Input";
 import { AuthLayout } from "../layout/authLayout/AuthLayout";
+import { setUser } from "../store/auth/authSlice";
+import { toast } from "../utils/sweet_alert";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const submit = (e) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const submit = async (e) => {
     e.preventDefault();
+    try {
+      const user = await AuthAPI.signin(email, password);
+      dispatch(setUser(user));
+      await toast("success", "Sing in is successful");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      await toast("error", error.message);
+    }
   };
 
   const form = (
