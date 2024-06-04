@@ -8,6 +8,7 @@ const Input = ({ onTextChange, placeholder, type }) => {
       className={s.input}
       onChange={(e) => onTextChange(e.target.value)}
       placeholder={placeholder}
+      required
     />
   );
 };

@@ -17,7 +17,7 @@ export default function SignIn() {
     try {
       const user = await AuthAPI.signin(email, password);
       dispatch(setUser(user));
-      await toast("success", "Sing in is successful");
+      await toast("success", "Sign in is successful");
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -28,7 +28,7 @@ export default function SignIn() {
   const form = (
     <div className="signInformContainer">
       <h2 className="signIntitle">
-        Signin <br />
+        Sign In <br />
         to access your team notes
       </h2>
       <form className="signInformGroup" onSubmit={submit}>
@@ -43,7 +43,7 @@ export default function SignIn() {
           Sign in!
         </Button>
         <span>
-          Don't have an account yet ? <Link>Signup</Link>
+          Don't have an account yet ? <Link to="/signup">Signup</Link>
         </span>
       </form>
     </div>
