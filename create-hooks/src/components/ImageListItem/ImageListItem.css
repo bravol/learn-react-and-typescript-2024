@@ -12,6 +12,7 @@ button {
 .card {
   border-radius: 40px;
   overflow: hidden;
+  background-color: aqua;
 }
 
 .card_banner {
