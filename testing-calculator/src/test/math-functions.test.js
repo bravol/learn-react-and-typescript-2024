@@ -1,4 +1,4 @@
-import { multiply, substract, sum, divide } from "utils/math-functions";
+import { divide, multiply, substract, sum } from "../utils/math-functions";
 
 describe("Maths functions", () => {
   it("sums correctly 2 values", () => {
