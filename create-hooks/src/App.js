@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import s from "./App.module.css";
+import { ImageList } from "./components/ImageList/ImageList";
+import { DATA } from "./data";
+import { useScrollPositionHook } from "./hooks/useScrollPositionHook";
+export default function App() {
+  const [imageList, setImageList] = useState(DATA);
 
-function App() {
+  const { isBottom } = useScrollPositionHook();
+  console.log(isBottom);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={s.root}>
+      <h1>Rand'images</h1>
+      <h2>Download random open source images</h2>
+      <ImageList imageList={imageList} />
     </div>
   );
 }
-
-export default App;
