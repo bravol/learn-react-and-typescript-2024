@@ -1,8 +1,11 @@
+import UseRef from "./hooks/UseRef";
+import { UseReducerHook } from "./hooks/useReducer/UseReducerHook";
 
 function App() {
   return (
-    <div >
-     hello
+    <div>
+      <UseRef />
+      <UseReducerHook />
     </div>
   );
 }
