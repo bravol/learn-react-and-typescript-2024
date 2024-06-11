@@ -1,10 +1,11 @@
-import { Heading, Text } from "@chakra-ui/react";
+import Header from "./features/Header";
+import Landing from "./features/Landing";
 
 function App() {
   return (
     <>
-      <Heading color="secondary">Title</Heading>
-      <Text>Text</Text>
+      <Header />
+      <Landing />
     </>
   );
 }
