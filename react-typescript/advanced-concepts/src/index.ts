@@ -71,3 +71,11 @@ class Wizzard<S extends Spell> {
     }
   }
 }
+
+const fireSpells: FireSpell[] = [
+  new FireSpell(FireSpellName.FireBolt),
+  new FireSpell(FireSpellName.FireWall),
+  new FireSpell(FireSpellName.BigBang),
+];
+const wizzard = new Wizzard<FireSpell>(fireSpells);
+wizzard.castAllAtOnce();
