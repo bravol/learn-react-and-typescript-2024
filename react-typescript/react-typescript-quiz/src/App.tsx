@@ -1,5 +1,11 @@
+import Header from "./features/Header";
+
 function App() {
-  return <>hello</>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default App;
