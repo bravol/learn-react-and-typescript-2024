@@ -1,9 +1,10 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
-import LogoImage from "./../assets/logo.png";
-import BubbleImage from "./../assets/bubble.png";
 import { useState } from "react";
-import { SetQnQty } from "./SetQnQty";
+import LogoImage from "../assets/logo.png";
+import BubbleImage from "../assets/bubble.png";
+import { SetQuestionQty } from "./SetQuestionQty";
 
+type Props = {};
 enum Step {
   SetQuestionQty,
   setQuestionCategory,
@@ -11,13 +12,13 @@ enum Step {
   Play,
   Score,
 }
-export default function Header() {
+const Header = (props: Props) => {
   const [step, setStep] = useState(Step.SetQuestionQty);
 
   const renderScreenByStep = () => {
     switch (step) {
       case Step.SetQuestionQty:
-        return <SetQnQty />;
+        return <SetQuestionQty />;
       case Step.setQuestionCategory:
         return <></>;
       case Step.SetQuestionDifficulty:
@@ -30,6 +31,7 @@ export default function Header() {
         return null;
     }
   };
+
   return (
     <Box py={10} h={"100%"}>
       <Flex justify={"center"}>
@@ -45,4 +47,6 @@ export default function Header() {
       <Box>{renderScreenByStep()}</Box>
     </Box>
   );
-}
+};
+
+export default Header;
