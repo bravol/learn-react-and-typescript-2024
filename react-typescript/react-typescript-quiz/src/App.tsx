@@ -9,7 +9,7 @@ function App() {
 
   async function fetchCategories() {
     const response = await QuizAPI.fetchCategory();
-    setCategories(response);
+    setCategories([{ id: -1, name: "Mixed" }, ...response]);
   }
   useEffect(() => {
     fetchCategories();
