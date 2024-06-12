@@ -11,6 +11,8 @@ import {
   QuizType,
 } from "../types/quiz_types";
 import { SetQuestionDifficulty } from "./SetQuestionDifficulty";
+import Play from "./Play";
+import Score from "./Score";
 
 type Props = {
   categories: QuizCategory[];
@@ -61,11 +63,18 @@ const Header = (props: Props) => {
           />
         );
       case Step.SetQuestionDifficulty:
-        return <SetQuestionDifficulty />;
+        return (
+          <SetQuestionDifficulty
+            onClickNext={(difficulty: QuizDifficulty) => {
+              setQuizParams({ ...quizParams, difficulty });
+              setStep(Step.Play);
+            }}
+          />
+        );
       case Step.Play:
-        return <></>;
+        return <Play />;
       case Step.Score:
-        return <></>;
+        return <Score />;
       default:
         return null;
     }
