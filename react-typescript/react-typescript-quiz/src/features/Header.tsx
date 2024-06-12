@@ -18,7 +18,7 @@ const Header = (props: Props) => {
   const renderScreenByStep = () => {
     switch (step) {
       case Step.SetQuestionQty:
-        return <SetQuestionQty />;
+        return <SetQuestionQty max={30} min={5} step={5} defaultValue={10} />;
       case Step.setQuestionCategory:
         return <></>;
       case Step.SetQuestionDifficulty:
@@ -44,7 +44,7 @@ const Header = (props: Props) => {
         right={-120}
         top={100}
       />
-      <Box>{renderScreenByStep()}</Box>
+      <Box mt={100}>{renderScreenByStep()}</Box>
     </Box>
   );
 };
