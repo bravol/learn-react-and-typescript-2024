@@ -12,6 +12,7 @@ import {
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 type Props = {
   categories: QuizCategory[];
+  onClickNext: (categoryId: string) => void;
 };
 export const SetQuestionsCategory = (props: Props) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>(
@@ -43,7 +44,7 @@ export const SetQuestionsCategory = (props: Props) => {
         </SimpleGrid>
       </RadioGroup>
       <Button
-        onClick={() => ""}
+        onClick={() => props.onClickNext(selectedCategoryId)}
         position={"absolute"}
         right={"10%"}
         marginTop={"5%"}

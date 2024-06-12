@@ -10,6 +10,7 @@ import {
   QuizDifficulty,
   QuizType,
 } from "../types/quiz_types";
+import { SetQuestionDifficulty } from "./SetQuestionDifficulty";
 
 type Props = {
   categories: QuizCategory[];
@@ -29,7 +30,7 @@ const Header = (props: Props) => {
     difficulty: QuizDifficulty.MIXED,
     type: QuizType.MIXED,
   });
-  //   console.log(quizParams);
+  console.log(quizParams);
 
   const renderScreenByStep = () => {
     switch (step) {
@@ -47,9 +48,20 @@ const Header = (props: Props) => {
           />
         );
       case Step.setQuestionCategory:
-        return <SetQuestionsCategory categories={props.categories} />;
+        return (
+          <SetQuestionsCategory
+            categories={props.categories}
+            onClickNext={(categoryId: string) => {
+              setQuizParams({
+                ...quizParams,
+                category: categoryId === "-1" ? "" : categoryId,
+              });
+              setStep(Step.SetQuestionDifficulty);
+            }}
+          />
+        );
       case Step.SetQuestionDifficulty:
-        return <></>;
+        return <SetQuestionDifficulty />;
       case Step.Play:
         return <></>;
       case Step.Score:
