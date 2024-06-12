@@ -1,5 +1,4 @@
 import {
-  Box,
   Flex,
   Heading,
   Slider,
@@ -7,14 +6,18 @@ import {
   SliderMark,
   SliderThumb,
   SliderTrack,
+  Button,
+  Box,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 type Props = {
   max: number;
   min: number;
   step: number;
   defaultValue: number;
+  onClickNext: (amount: number) => void;
 };
 
 export const SetQuestionQty = (props: Props) => {
@@ -31,26 +34,37 @@ export const SetQuestionQty = (props: Props) => {
     return marks;
   };
   return (
-    <Flex direction={"column"} alignItems={"center"}>
-      <Heading as={"h1"} fontSize={"3xl"} mb={2}>
-        How many questions ?
-      </Heading>
-      <Slider
-        value={sliderValue}
-        maxW={"400"}
-        max={props.max}
-        min={props.min}
-        step={props.step}
-        aria-label="slider-ex-6"
-        colorScheme="yellow"
-        onChange={(val) => setSliderValue(val)}
+    <Box position={"relative"}>
+      <Flex direction={"column"} alignItems={"center"}>
+        <Heading as={"h1"} fontSize={"3xl"} mb={2}>
+          How many questions ?
+        </Heading>
+        <Slider
+          value={sliderValue}
+          maxW={"400"}
+          max={props.max}
+          min={props.min}
+          step={props.step}
+          aria-label="slider-ex-6"
+          colorScheme="yellow"
+          onChange={(val) => setSliderValue(val)}
+        >
+          {renderMarks()}
+          <SliderTrack>
+            <SliderFilledTrack />
+          </SliderTrack>
+          <SliderThumb />
+        </Slider>
+      </Flex>
+      <Button
+        position={"absolute"}
+        top={"80%"}
+        right={"10%"}
+        rightIcon={<ArrowForwardIcon />}
+        onClick={() => props.onClickNext(sliderValue)}
       >
-        {renderMarks()}
-        <SliderTrack>
-          <SliderFilledTrack />
-        </SliderTrack>
-        <SliderThumb />
-      </Slider>
-    </Flex>
+        Set category
+      </Button>
+    </Box>
   );
 };
