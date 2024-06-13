@@ -18,6 +18,7 @@ import Timer from "./Timer";
 
 type Props = {
   quiz: QuizItem[];
+  onFinsihed: (history: boolean[]) => void;
 };
 
 const Play = (props: Props) => {
@@ -103,6 +104,7 @@ const Play = (props: Props) => {
     setHistory([...history, false]);
     setQuestionState("invalid");
   };
+
   return (
     <Box margin={5}>
       <Flex direction={"column"} alignItems={"center"} justify={"center"}>
@@ -135,8 +137,12 @@ const Play = (props: Props) => {
               : InValidAnimation
           }
           onComplete={() => {
-            setQuestionState("unanswered");
-            setCurrentQuizItemIndex(currentQuizItemIndex + 1);
+            if (currentQuizItemIndex < props.quiz.length - 1) {
+              setQuestionState("unanswered");
+              setCurrentQuizItemIndex(currentQuizItemIndex + 1);
+            } else {
+              props.onFinsihed(history);
+            }
           }}
         />
       </Flex>

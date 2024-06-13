@@ -1,4 +1,4 @@
-import { Box, Flex, Image } from "@chakra-ui/react";
+import { Box, Flex, Image, Spinner } from "@chakra-ui/react";
 import { useState } from "react";
 import LogoImage from "../assets/logo.png";
 import BubbleImage from "../assets/bubble.png";
@@ -18,6 +18,7 @@ import { QuizAPI } from "../api/quizAPI";
 
 type Props = {
   categories: QuizCategory[];
+  loading: boolean;
 };
 enum Step {
   SetQuestionQty,
@@ -36,21 +37,36 @@ const Header = (props: Props) => {
   });
   console.log(quizParams);
   const [quiz, setQuiz] = useState<QuizItem[]>([]);
+  const [history, setHistory] = useState<boolean[]>([]);
 
   const renderScreenByStep = () => {
     switch (step) {
       case Step.SetQuestionQty:
         return (
-          <SetQuestionQty
-            max={30}
-            min={5}
-            step={5}
-            defaultValue={10}
-            onClickNext={(amount: number) => {
-              setQuizParams({ ...quizParams, amount });
-              setStep(Step.setQuestionCategory);
-            }}
-          />
+          <>
+            {props.loading ? (
+              <Flex
+                position={"absolute"}
+                justify={"center"}
+                alignItems={"center"}
+                minHeight={"100vh"}
+                width={"100%"}
+              >
+                <Spinner />
+              </Flex>
+            ) : (
+              <SetQuestionQty
+                max={30}
+                min={5}
+                step={5}
+                defaultValue={10}
+                onClickNext={(amount: number) => {
+                  setQuizParams({ ...quizParams, amount });
+                  setStep(Step.setQuestionCategory);
+                }}
+              />
+            )}
+          </>
         );
       case Step.setQuestionCategory:
         return (
@@ -90,9 +106,24 @@ const Header = (props: Props) => {
           />
         );
       case Step.Play:
-        return <Play quiz={quiz} />;
+        return (
+          <Play
+            quiz={quiz}
+            onFinsihed={(history_: boolean[]) => {
+              setHistory(history_);
+              setStep(Step.Score);
+            }}
+          />
+        );
       case Step.Score:
-        return <Score />;
+        return (
+          <Score
+            history={history}
+            onNextGame={() => {
+              setStep(Step.SetQuestionQty);
+            }}
+          />
+        );
       default:
         return null;
     }
