@@ -3,6 +3,7 @@ import { QuizItem } from "../types/quiz_types";
 import {
   Box,
   Flex,
+  HStack,
   Heading,
   Radio,
   RadioGroup,
@@ -22,7 +23,13 @@ const Play = (props: Props) => {
   const [currentQuizItemIndex, setCurrentQuizItemIndex] = useState<number>(0);
   const currentQuizItem = props.quiz[currentQuizItemIndex];
   const [availableAnswers, setAvalibaleAnswers] = useState<string[]>([]);
-
+  //selected answer
+  const [answer, setAnswer] = useState<string>("");
+  //is it correct or un correct or not answered
+  const [questionState, setQuestionState] = useState<
+    "valid" | "invalid" | "unanswered"
+  >("unanswered");
+  const [history, setHistory] = useState<boolean[]>([]);
   //shuffle them
   useEffect(() => {
     setAvalibaleAnswers(
@@ -32,12 +39,6 @@ const Play = (props: Props) => {
       ].sort(() => Math.random() - 0.5)
     );
   }, [currentQuizItemIndex]);
-  //selected answer
-  const [answer, setAnswer] = useState<string>("");
-  //is it correct or un correct or not answered
-  const [questionState, setQuestionState] = useState<
-    "valid" | "invalid" | "unanswered"
-  >("unanswered");
 
   //checking where the answer is correct
   function isValidAnswer(answer: string) {
@@ -46,13 +47,16 @@ const Play = (props: Props) => {
 
   useEffect(() => {
     if (answer) {
-      if (isValidAnswer(answer)) {
+      const isValid = isValidAnswer(answer);
+      if (isValid) {
         setQuestionState("valid");
       } else {
         setQuestionState("invalid");
       }
+      setHistory([...history, isValid]);
     }
   }, [answer]);
+
   //displaying different answers using radio buttons
   const radioLists = availableAnswers.map((availableAnswer: string) => {
     return (
@@ -71,10 +75,34 @@ const Play = (props: Props) => {
       </Radio>
     );
   });
+  //progress Bar
+  const renderProgressBar = () => {
+    return (
+      <HStack>
+        {props.quiz.map((item, i) => {
+          return (
+            <Box
+              key={i}
+              h={3}
+              w={25}
+              backgroundColor={
+                i >= currentQuizItemIndex
+                  ? "gray.200"
+                  : history[i]
+                  ? "green.500"
+                  : "red.500"
+              }
+            />
+          );
+        })}
+      </HStack>
+    );
+  };
 
   return (
     <Box margin={5}>
       <Flex direction={"column"} alignItems={"center"} justify={"center"}>
+        {renderProgressBar()}
         <Heading fontSize={"3xl"} mb={20}>
           {decode(currentQuizItem.question)}
         </Heading>
