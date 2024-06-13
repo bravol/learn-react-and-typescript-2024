@@ -8,11 +8,13 @@ import {
   FetchQuizParams,
   QuizCategory,
   QuizDifficulty,
+  QuizItem,
   QuizType,
 } from "../types/quiz_types";
 import { SetQuestionDifficulty } from "./SetQuestionDifficulty";
 import Play from "./Play";
 import Score from "./Score";
+import { QuizAPI } from "../api/quizAPI";
 
 type Props = {
   categories: QuizCategory[];
@@ -33,6 +35,7 @@ const Header = (props: Props) => {
     type: QuizType.MIXED,
   });
   console.log(quizParams);
+  const [quiz, setQuiz] = useState<QuizItem[]>([]);
 
   const renderScreenByStep = () => {
     switch (step) {
@@ -65,14 +68,29 @@ const Header = (props: Props) => {
       case Step.SetQuestionDifficulty:
         return (
           <SetQuestionDifficulty
-            onClickNext={(difficulty: QuizDifficulty) => {
-              setQuizParams({ ...quizParams, difficulty });
-              setStep(Step.Play);
+            onClickNext={async (difficulty: QuizDifficulty) => {
+              const params = {
+                ...quizParams,
+                difficulty,
+              };
+              setQuizParams(params);
+              const quiz = await QuizAPI.fetchQuiz(params);
+              if (quiz.length <= 0) {
+                alert(
+                  "We could not find" +
+                    params.amount +
+                    "questions for you.Restarting game......"
+                );
+                setStep(Step.SetQuestionQty);
+              } else {
+                setQuiz(quiz);
+                setStep(Step.Play);
+              }
             }}
           />
         );
       case Step.Play:
-        return <Play />;
+        return <Play quiz={quiz} />;
       case Step.Score:
         return <Score />;
       default:

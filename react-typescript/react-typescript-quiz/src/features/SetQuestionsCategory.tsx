@@ -8,6 +8,7 @@ import {
   Radio,
   RadioGroup,
   SimpleGrid,
+  Text,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 type Props = {
@@ -18,15 +19,25 @@ export const SetQuestionsCategory = (props: Props) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>(
     props.categories[0].id.toString()
   );
-  const radioLists = props.categories.map((category: QuizCategory) => {
-    return (
+
+  let radioLists;
+
+  if (props.categories && props.categories.length > 0) {
+    radioLists = props.categories.map((category) => (
       <Radio value={category.id.toString()} key={category.id}>
         {category.name}
       </Radio>
+    ));
+  } else {
+    radioLists = (
+      <>
+        <Text>No categories found</Text>
+      </>
     );
-  });
+  }
+
   return (
-    <Box position={"relative"} padding={10}>
+    <Box position={"relative"} padding={10} alignItems={"center"}>
       <Flex direction={"column"} alignItems={"center"}>
         <Heading as="h1" fontSize={"3xl"} mb={20}>
           Which topic ?

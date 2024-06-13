@@ -1,5 +1,11 @@
 import axios from "axios";
-import { FetchQuizCategoriesResponse, QuizCategory } from "../types/quiz_types";
+import {
+  FetchQuizCategoriesResponse,
+  FetchQuizParams,
+  FetchQuizResp,
+  QuizCategory,
+  QuizItem,
+} from "../types/quiz_types";
 
 const BASE_URL = "https://opentdb.com";
 export class QuizAPI {
@@ -8,5 +14,11 @@ export class QuizAPI {
       BASE_URL + "/api_category.php"
     );
     return data.trivia_categories;
+  }
+  static async fetchQuiz(params: FetchQuizParams): Promise<QuizItem[]> {
+    const { data } = await axios.get<FetchQuizResp>(BASE_URL + "/api.php", {
+      params: params,
+    });
+    return data.results;
   }
 }
