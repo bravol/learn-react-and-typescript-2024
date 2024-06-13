@@ -12,7 +12,7 @@ import {
   QuizType,
 } from "../types/quiz_types";
 import { SetQuestionDifficulty } from "./SetQuestionDifficulty";
-import Play from "./Play";
+import Play from "./play_quiz/Play";
 import Score from "./Score";
 import { QuizAPI } from "../api/quizAPI";
 

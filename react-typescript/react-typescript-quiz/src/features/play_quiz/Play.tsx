@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { QuizItem } from "../types/quiz_types";
+import { QuizItem } from "../../types/quiz_types";
 import {
   Box,
   Flex,
@@ -11,9 +11,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Lottie from "lottie-react";
-import ValidAnimation from "../assets/lottie/valid.json";
-import InValidAnimation from "../assets/lottie/invalid.json";
+import ValidAnimation from "../../assets/lottie/valid.json";
+import InValidAnimation from "../../assets/lottie/invalid.json";
 import { decode } from "html-entities"; // heps the data hat i cnnot read
+import Timer from "./Timer";
 
 type Props = {
   quiz: QuizItem[];
@@ -75,7 +76,7 @@ const Play = (props: Props) => {
       </Radio>
     );
   });
-  //progress Bar
+  //progress Bar to check out progress
   const renderProgressBar = () => {
     return (
       <HStack>
@@ -98,11 +99,20 @@ const Play = (props: Props) => {
       </HStack>
     );
   };
-
+  const failedQuestion = () => {
+    setHistory([...history, false]);
+    setQuestionState("invalid");
+  };
   return (
     <Box margin={5}>
       <Flex direction={"column"} alignItems={"center"} justify={"center"}>
         {renderProgressBar()}
+        {questionState === "unanswered" && (
+          <Box position={"absolute"} top={50} right={50}>
+            <Timer max={10} onFinished={failedQuestion} />
+          </Box>
+        )}
+
         <Heading fontSize={"3xl"} mb={20}>
           {decode(currentQuizItem.question)}
         </Heading>
