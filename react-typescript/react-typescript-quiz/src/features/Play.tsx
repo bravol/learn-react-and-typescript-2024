@@ -7,10 +7,12 @@ import {
   Radio,
   RadioGroup,
   SimpleGrid,
+  Text,
 } from "@chakra-ui/react";
 import Lottie from "lottie-react";
 import ValidAnimation from "../assets/lottie/valid.json";
 import InValidAnimation from "../assets/lottie/invalid.json";
+import { decode } from "html-entities"; // heps the data hat i cnnot read
 
 type Props = {
   quiz: QuizItem[];
@@ -19,22 +21,25 @@ type Props = {
 const Play = (props: Props) => {
   const [currentQuizItemIndex, setCurrentQuizItemIndex] = useState<number>(0);
   const currentQuizItem = props.quiz[currentQuizItemIndex];
-  const availableAnswers = [
-    currentQuizItem.correct_answer,
-    ...currentQuizItem.incorrect_answers,
-  ];
-  const radioLists = availableAnswers.map((availableAnswer: string) => {
-    return (
-      <Radio key={availableAnswer} value={availableAnswer}>
-        {availableAnswer}
-      </Radio>
+  const [availableAnswers, setAvalibaleAnswers] = useState<string[]>([]);
+
+  //shuffle them
+  useEffect(() => {
+    setAvalibaleAnswers(
+      [
+        currentQuizItem.correct_answer,
+        ...currentQuizItem.incorrect_answers,
+      ].sort(() => Math.random() - 0.5)
     );
-  });
+  }, [currentQuizItemIndex]);
+  //selected answer
   const [answer, setAnswer] = useState<string>("");
+  //is it correct or un correct or not answered
   const [questionState, setQuestionState] = useState<
     "valid" | "invalid" | "unanswered"
   >("unanswered");
 
+  //checking where the answer is correct
   function isValidAnswer(answer: string) {
     return answer === currentQuizItem.correct_answer;
   }
@@ -48,13 +53,35 @@ const Play = (props: Props) => {
       }
     }
   }, [answer]);
+  //displaying different answers using radio buttons
+  const radioLists = availableAnswers.map((availableAnswer: string) => {
+    return (
+      <Radio key={availableAnswer} value={availableAnswer}>
+        <Text
+          color={
+            questionState === "unanswered"
+              ? "black"
+              : isValidAnswer(availableAnswer)
+              ? "green.500"
+              : "red.500"
+          }
+        >
+          {decode(availableAnswer)}
+        </Text>
+      </Radio>
+    );
+  });
+
   return (
     <Box margin={5}>
       <Flex direction={"column"} alignItems={"center"} justify={"center"}>
-        <Heading fontSize={"3xl"} mt={100} mb={20}>
-          {currentQuizItem.question}
+        <Heading fontSize={"3xl"} mb={20}>
+          {decode(currentQuizItem.question)}
         </Heading>
-        <RadioGroup value={answer} onChange={setAnswer}>
+        <RadioGroup
+          value={answer}
+          onChange={questionState === "unanswered" ? setAnswer : undefined}
+        >
           <SimpleGrid column={2} spacing={4}>
             {radioLists}
           </SimpleGrid>
