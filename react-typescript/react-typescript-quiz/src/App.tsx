@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
-import Header from "./features/Header";
 import { useEffect, useState } from "react";
 import { QuizAPI } from "./api/quizAPI";
 import { QuizCategory } from "./types/quiz_types";
+import Landing from "./features/Landing";
 
 function App() {
   const [categories, setCategories] = useState<QuizCategory[]>([]);
@@ -20,7 +20,7 @@ function App() {
   }, []);
   return (
     <Box>
-      {categories && <Header categories={categories} loading={loading} />}
+      {categories && <Landing categories={categories} loading={loading} />}
     </Box>
   );
 }

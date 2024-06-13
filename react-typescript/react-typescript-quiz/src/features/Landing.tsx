@@ -27,7 +27,7 @@ enum Step {
   Play,
   Score,
 }
-const Header = (props: Props) => {
+const Landing = (props: Props) => {
   const [step, setStep] = useState(Step.SetQuestionQty);
   const [quizParams, setQuizParams] = useState<FetchQuizParams>({
     amount: 10,
@@ -146,4 +146,4 @@ const Header = (props: Props) => {
   );
 };
 
-export default Header;
+export default Landing;
