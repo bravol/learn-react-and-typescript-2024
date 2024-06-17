@@ -1,8 +1,14 @@
 import { ActionType } from "../action_types";
 import { Action, RepositoriesState } from "../actions";
 
-const reducers = (
-  state: RepositoriesState,
+const initialState = {
+  loading: false,
+  error: null,
+  data: [],
+};
+
+export const repositoriesReducers = (
+  state: RepositoriesState = initialState,
   action: Action
 ): RepositoriesState => {
   switch (action.type) {
@@ -29,4 +35,4 @@ const reducers = (
   }
 };
 
-export default reducers;
+export default repositoriesReducers;
